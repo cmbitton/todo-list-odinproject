@@ -1,0 +1,24 @@
+{
+  "name": "todo-list-odinproject",
+  "version": "1.0.0",
+  "description": "To Do list from TOP",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmbitton/todo-list-odinproject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmbitton/todo-list-odinproject/issues"
+  },
+  "homepage": "https://github.com/cmbitton/todo-list-odinproject#readme",
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
