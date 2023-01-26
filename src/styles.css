@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100vh;
+    width: 100%;
+    background-color: #eee;
+}
+
+#content{
+    display: grid;
+    height: inherit;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr 8fr;
+}
+
+.navbar {
+    grid-column: 1 / -1;
+    background-color: #bbb;
+}
+
+.menu {
+    background-color: #999;
+}
+
+.main-content-container {
+    background-color: #eee;
+}
+
+.add-todo-button{
+    text-align: center;
+}
+
+.new-todo-container {
+    position: absolute;
+    z-index: 10;
+    top: 40%;
+    left: 50%;
+    height: 300px;
+    width: 300px;
+    background-color: lightblue;
+}
+
+.hidden {
+    display: none;
+}
