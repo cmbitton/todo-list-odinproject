@@ -1,8 +1,10 @@
 export default class ToDoModal {
     content = document.querySelector('#content');
     modalContainer = document.createElement('div');
+    modalForm = document.createElement('form');
     constructor () {
         this.modalContainer.classList.add('new-todo-container', 'hidden');
+        this.modalContainer.append(this.modalForm)
         this.content.append(this.modalContainer);
 
     }
@@ -30,5 +32,9 @@ export default class ToDoModal {
             this.modalContainer.classList.toggle('hidden')
         }
         return exitForm;
+    }
+
+    loadModalContent () {
+
     }
 }
