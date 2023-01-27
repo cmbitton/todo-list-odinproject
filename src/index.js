@@ -43,7 +43,8 @@ function addTodoToList() {
         const todo = new ToDo(todoTitle, todoDescription, todoDate, todoTime);
         todosList.push(todo);
         landingLoader.mainContent.loadTodos(todosList);
-        console.log(todosList)
+        todomodal.closeModal(e);
+        landingLoader.dimBackground();
     })
 
 }

@@ -3,14 +3,14 @@ export default class ToDoModal {
     modalContainer = document.createElement('div');
     modalHeader = document.createElement('h2');
     modalForm = document.createElement('form');
-    constructor () {
+    constructor() {
         this.modalContainer.classList.add('new-todo-container', 'hidden');
         this.modalContainer.append(this.modalHeader, this.modalForm);
         this.content.append(this.modalContainer);
 
     }
 
-    toggleModalVisibility () {
+    toggleModalVisibility() {
         this.modalContainer.classList.toggle('hidden');
     }
 
@@ -22,12 +22,14 @@ export default class ToDoModal {
     closeModal(e) {
         let reviewNode = e.target;
         let exitForm = true;
-        while (reviewNode && reviewNode.nodeName !== 'BODY') {
-          if (reviewNode.classList.contains('new-todo-container')) {
-            exitForm = false;
-            break;
-          }
-          reviewNode = reviewNode.parentNode;
+        if (!e.target.classList.contains('submit-todo-button')) {
+            while (reviewNode && reviewNode.nodeName !== 'BODY') {
+                if (reviewNode.classList.contains('new-todo-container')) {
+                    exitForm = false;
+                    break;
+                }
+                reviewNode = reviewNode.parentNode;
+            }
         }
         if (exitForm && !this.modalContainer.classList.contains('hidden')) {
             this.modalContainer.classList.toggle('hidden')
@@ -35,7 +37,7 @@ export default class ToDoModal {
         return exitForm;
     }
 
-    loadModalContent () {
+    loadModalContent() {
         this.modalForm.innerHTML = '';
         this.modalHeader.textContent = 'New To Do';
 
@@ -104,11 +106,11 @@ export default class ToDoModal {
     }
 }
 
-function getCurrentDate () {
+function getCurrentDate() {
     const date = new Date();
     const year = date.getFullYear();
     const day = date.getDate();
     let month = date.getMonth() + 1;
-    if(month.toString.length < 2) month = '0' + month;
-    return {year, month, day}
+    if (month.toString.length < 2) month = '0' + month;
+    return { year, month, day }
 }

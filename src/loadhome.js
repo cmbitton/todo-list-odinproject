@@ -1,17 +1,17 @@
 export default class LandingPage {
     content = document.querySelector('#content');
-    constructor () {
+    constructor() {
         this.navMenu = new Navigation;
         this.mainContent = new MainContent;
     }
 
-    dimBackground () {
+    dimBackground() {
         this.navMenu.menu.style.filter = 'brightness(50%)';
         this.navMenu.navbar.style.filter = 'brightness(50%)';
         this.mainContent.mainContentContainer.style.filter = 'brightness(50%)';
     }
 
-    unDimBackground () {
+    unDimBackground() {
         this.navMenu.menu.removeAttribute('style');
         this.navMenu.navbar.removeAttribute('style');
         this.mainContent.mainContentContainer.removeAttribute('style');
@@ -28,11 +28,11 @@ class Navigation {
     menu = document.createElement('div');
     home = document.createElement('p');
     projects = document.createElement('p');
-    constructor () {
+    constructor() {
 
     }
 
-    loadNav () {
+    loadNav() {
         this.navbar.classList.add('navbar');
         this.logo.classList.add('logo');
         this.logo.textContent = 'Your Logo';
@@ -41,7 +41,7 @@ class Navigation {
 
     }
 
-    loadMenu () {
+    loadMenu() {
         this.menu.classList.add('menu');
         this.menuButtonContainer.classList.add('nav-button-container');
         this.home.classList.add('home', 'navbutton', 'button-selected');
@@ -63,11 +63,11 @@ class MainContent {
     mainContentContainer = document.createElement('div');
     todoscontainer = document.createElement('div');
     addTodoButton = document.createElement('div');
-    constructor () {
+    constructor() {
 
     }
 
-    loadMainContent () {
+    loadMainContent() {
         this.mainContentContainer.classList.add('main-content-container');
         this.addTodoButton.classList.add('add-todo-button');
         this.todoscontainer.classList.add('todos-container');
@@ -77,9 +77,9 @@ class MainContent {
         this.content.append(this.mainContentContainer);
     }
 
-    loadTodos (arr) {
+    loadTodos(arr) {
         this.todoscontainer.innerHTML = '';
-        for(const todo of arr){
+        for (const todo of arr) {
             const todoContainer = document.createElement('div');
             todoContainer.classList.add('todo-container');
 
@@ -103,17 +103,39 @@ class MainContent {
             todoTime.classList.add('todo-time');
             todoTime.innerHTML = `<span class="due-time-label">Time Due: </span>${formatTime(todo.time)}`;
 
+            //completion button
+            const completed = document.createElement('button');
+            completed.setAttribute('type', 'button')
+            completed.classList.add('complete-button');
+            completed.textContent = 'Not Completed';
 
-            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime);
+
+            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed);
             this.todoscontainer.append(todoContainer);
+        }
+        this.addCompletionButtonEvent();
+    }
 
+    addCompletionButtonEvent() {
+        const completionButton = document.querySelectorAll('.complete-button');
+        for (const button of completionButton) {
+            button.addEventListener('click', (e) => {
+                if (button.classList.contains('completed')) {
+                    button.classList.remove('completed');
+                    button.textContent = 'Not Completed'
+                    e.target.parentNode.classList.remove('completed');
+                }
+                else {button.classList.add('completed')
+                      e.target.parentNode.classList.add('completed')
+                      button.textContent = 'Completed'};
+            })
         }
     }
 }
 
-function formatTime (time){
+function formatTime(time) {
     if (+time.slice(0, 2) === 0) return (`${+time.slice(0, 2) + 12}:${time.slice(3, 5)} AM`);
-    else if(+time.slice(0, 2) < 12) return (time+= ' AM');
-    else if(+time.slice(0, 2) === 12) return (`${time.slice(0, 2)}:${time.slice(3, 5)} PM`);
+    else if (+time.slice(0, 2) < 12) return (time += ' AM');
+    else if (+time.slice(0, 2) === 12) return (`${time.slice(0, 2)}:${time.slice(3, 5)} PM`);
     else return (`${+time.slice(0, 2) - 12}:${time.slice(3, 5)} PM`);
 }
