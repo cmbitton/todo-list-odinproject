@@ -78,7 +78,28 @@ export default class ToDoModal {
         dateContainer.classList.add('todo-date-container');
         dateContainer.append(taskDateLabel, taskDate);
 
-        this.modalForm.append(nameContainer, descriptionContainer, dateContainer);
+        //time
+        const timeContainer = document.createElement('div');
+        const taskTime = document.createElement('input');
+        const taskTimeLabel = document.createElement('label');
+        taskTime.setAttribute('type', 'time')
+        taskTime.setAttribute('name', 'todotime');
+        taskTime.setAttribute('id', 'todotime');
+        taskTimeLabel.setAttribute('for', 'todotime');
+        taskTimeLabel.textContent = 'Time Due';
+
+        timeContainer.classList.add('todo-date-container');
+        timeContainer.append(taskTimeLabel, taskTime);
+
+
+        //addtodo button
+        const todoSubmitButton = document.createElement('button');
+        todoSubmitButton.classList.add('submit-todo-button')
+        todoSubmitButton.textContent = 'Add ToDo';
+
+
+
+        this.modalForm.append(nameContainer, descriptionContainer, dateContainer, timeContainer, todoSubmitButton);
 
     }
 }
