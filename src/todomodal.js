@@ -78,7 +78,7 @@ export default class ToDoModal {
         dateContainer.classList.add('todo-date-container');
         dateContainer.append(taskDateLabel, taskDate);
 
-        this.modalForm.append(nameContainer, taskDateLabel, taskDate);
+        this.modalForm.append(nameContainer, descriptionContainer, dateContainer);
 
     }
 }
