@@ -1,88 +1,44 @@
 export default class LandingPage {
     content = document.querySelector('#content');
+    nav = document.querySelector('.navbar');
+    menu = document.querySelector('.menu');
     constructor() {
-        this.navMenu = new Navigation;
         this.mainContent = new MainContent;
     }
 
     dimBackground() {
-        this.navMenu.menu.style.filter = 'brightness(50%)';
-        this.navMenu.navbar.style.filter = 'brightness(50%)';
+        this.nav.style.filter = 'brightness(50%)';
+        this.menu.style.filter = 'brightness(50%)';
         this.mainContent.mainContentContainer.style.filter = 'brightness(50%)';
     }
 
     unDimBackground() {
-        this.navMenu.menu.removeAttribute('style');
-        this.navMenu.navbar.removeAttribute('style');
+        this.nav.removeAttribute('style');
+        this.menu.removeAttribute('style');
         this.mainContent.mainContentContainer.removeAttribute('style');
     }
 
 }
 
 
-class Navigation {
-    content = document.querySelector('#content');
-    navbar = document.createElement('div');
-    logo = document.createElement('h3');
-    menuButtonContainer = document.createElement('div');
-    menu = document.createElement('div');
-    home = document.createElement('p');
-    projects = document.createElement('p');
-    constructor() {
-
-    }
-
-    loadNav() {
-        this.navbar.classList.add('navbar');
-        this.logo.classList.add('logo');
-        this.logo.textContent = 'Your Logo';
-        this.navbar.append(this.logo);
-        this.content.append(this.navbar);
-
-    }
-
-    loadMenu() {
-        this.menu.classList.add('menu');
-        this.menuButtonContainer.classList.add('nav-button-container');
-        this.home.classList.add('home', 'navbutton', 'button-selected');
-        this.projects.classList.add('projects', 'navbutton');
-
-        this.home.textContent = 'Home';
-        this.projects.textContent = 'Projects';
-
-        this.menuButtonContainer.append(this.home, this.projects)
-        this.menu.append(this.menuButtonContainer)
-        this.content.append(this.menu);
-    }
-
-
-}
-
 class MainContent {
     content = document.querySelector('#content');
-    mainContentContainer = document.createElement('div');
-    todoscontainer = document.createElement('div');
-    addTodoButton = document.createElement('div');
+    mainContentContainer = document.querySelector('.main-content-container');
+    todoscontainer = document.querySelector('.todos-container');
     constructor() {
 
     }
 
-    loadMainContent() {
-        this.mainContentContainer.classList.add('main-content-container');
-        this.addTodoButton.classList.add('add-todo-button');
-        this.todoscontainer.classList.add('todos-container');
-        this.addTodoButton.textContent = 'New Todo +'
-
-        this.mainContentContainer.append(this.addTodoButton, this.todoscontainer);
-        this.content.append(this.mainContentContainer);
-    }
 
     loadTodos(arr) {
+        let i = 0;
         this.todoscontainer.innerHTML = '';
         for (const todo of arr) {
             const todoContainer = document.createElement('div');
             todoContainer.classList.add('todo-container');
-
+            todoContainer.setAttribute('data-todo-index', i);
+            if(todo.complete === true) todoContainer.classList.add('completed');
+            i++
             //title
             const todoTitle = document.createElement('h2');
             todoTitle.classList.add('todo-title');
@@ -107,16 +63,17 @@ class MainContent {
             const completed = document.createElement('button');
             completed.setAttribute('type', 'button')
             completed.classList.add('complete-button');
-            completed.textContent = 'Not Completed';
+            if(todo.complete === true) completed.classList.add('completed');
+            (todo.complete === false) ? completed.textContent = 'Not Completed' : completed.textContent = 'Completed';
 
 
             todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed);
             this.todoscontainer.append(todoContainer);
         }
-        this.addCompletionButtonEvent();
+        this.addCompletionButtonEvent(arr);
     }
 
-    addCompletionButtonEvent() {
+    addCompletionButtonEvent(arr) {
         const completionButton = document.querySelectorAll('.complete-button');
         for (const button of completionButton) {
             button.addEventListener('click', (e) => {
@@ -124,10 +81,14 @@ class MainContent {
                     button.classList.remove('completed');
                     button.textContent = 'Not Completed'
                     e.target.parentNode.classList.remove('completed');
+                    arr[e.target.parentNode.getAttribute('data-todo-index')].complete = false;
                 }
-                else {button.classList.add('completed')
-                      e.target.parentNode.classList.add('completed')
-                      button.textContent = 'Completed'};
+                else {
+                    button.classList.add('completed');
+                    e.target.parentNode.classList.add('completed');
+                    button.textContent = 'Completed';
+                    arr[e.target.parentNode.getAttribute('data-todo-index')].complete = true;
+                };
             })
         }
     }

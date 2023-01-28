@@ -5,19 +5,16 @@ import ToDoModal from "./todomodal.js";
 const landingLoader = new LandingPage();
 const todomodal = new ToDoModal();
 const todosList = [];
-landingLoader.navMenu.loadNav();
-landingLoader.navMenu.loadMenu();
-landingLoader.mainContent.loadMainContent();
-
+const modalContainer = document.querySelector('.new-todo-container');
 const newTodoButton = document.querySelector('.add-todo-button');
+const submitTodoButton = document.querySelector('.submit-todo-button');
 
 //opens the add new todo modal
 newTodoButton.addEventListener('click', (e) => {
-    if (todomodal.modalContainer.classList.contains('hidden')) {
+    if (modalContainer.classList.contains('hidden')) {
         todomodal.openModal(e);
-        todomodal.loadModalContent();
         landingLoader.dimBackground();
-        addTodoToList();
+
     }
 });
 
@@ -32,20 +29,21 @@ window.addEventListener('click', (e) => {
 
 
 
-function addTodoToList() {
-    const submitTodoButton = document.querySelector('.submit-todo-button');
-    submitTodoButton.addEventListener('click', (e) => {
-        e.preventDefault();
+
+
+submitTodoButton.addEventListener('click', (e) => {
+    e.preventDefault();
         const todoTitle = document.querySelector('#todoname').value;
         const todoDescription = document.querySelector('#tododescription').value;
         const todoDate = document.querySelector('#tododate').value;
         const todoTime = document.querySelector('#todotime').value;
-        const todo = new ToDo(todoTitle, todoDescription, todoDate, todoTime);
+        const todo = new ToDo(todoTitle, todoDescription, todoDate, todoTime, false);
         todosList.push(todo);
+        console.log(todosList)
         landingLoader.mainContent.loadTodos(todosList);
         todomodal.closeModal(e);
         landingLoader.dimBackground();
     })
 
-}
+
 

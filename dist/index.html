@@ -1,14 +1,47 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="main.js" defer></script>
+    <script src="main.js" defer=""></script>
     <link rel="stylesheet" href="../src/styles.css">
     <title>Document</title>
 </head>
+
 <body>
-    <div id="content"></div>
+    <div id="content">
+
+        <div class="navbar">
+            <h3 class="logo">Your Logo</h3>
+        </div>
+        <div class="menu">
+            <div class="nav-button-container">
+                <p class="home navbutton button-selected">Home</p>
+                <p class="projects navbutton">Projects</p>
+            </div>
+        </div>
+        <div class="main-content-container">
+            <div class="add-todo-button">New Todo +</div>
+            <div class="todos-container"></div>
+        </div>
+        <div class="new-todo-container hidden">
+            <h2>New To Do</h2>
+            <form>
+                <div class="todo-name-container"><label for="todoname">Title</label><input name="todoname"
+                        id="todoname"></div>
+                <div class="todo-description-container"><label for="tododescription">Description</label><textarea
+                        name="tododescription" id="tododescription"></textarea></div>
+                <div class="todo-date-container"><label for="tododate">Due Date</label><input type="date"
+                        name="tododate" id="tododate" min="2023-01-27"></div>
+                <div class="todo-date-container"><label for="todotime">Time Due</label><input type="time"
+                        name="todotime" id="todotime"></div><button class="submit-todo-button">Add ToDo</button>
+            </form>
+        </div>
+    </div>
+
+
+
 </body>
+
 </html>

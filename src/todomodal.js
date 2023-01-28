@@ -1,12 +1,7 @@
 export default class ToDoModal {
     content = document.querySelector('#content');
-    modalContainer = document.createElement('div');
-    modalHeader = document.createElement('h2');
-    modalForm = document.createElement('form');
+    modalContainer = document.querySelector('.new-todo-container');
     constructor() {
-        this.modalContainer.classList.add('new-todo-container', 'hidden');
-        this.modalContainer.append(this.modalHeader, this.modalForm);
-        this.content.append(this.modalContainer);
 
     }
 
@@ -37,71 +32,11 @@ export default class ToDoModal {
         return exitForm;
     }
 
-    loadModalContent() {
-        this.modalForm.innerHTML = '';
-        this.modalHeader.textContent = 'New To Do';
-
-        //title
-        const nameContainer = document.createElement('div');
-        const taskName = document.createElement('input');
-        const taskNameLabel = document.createElement('label');
-        taskName.setAttribute('name', 'todoname');
-        taskName.setAttribute('id', 'todoname');
-        taskNameLabel.setAttribute('for', 'todoname');
-        taskNameLabel.textContent = 'Title';
-
-        nameContainer.classList.add('todo-name-container');
-        nameContainer.append(taskNameLabel, taskName);
-
-        //Description
-        const descriptionContainer = document.createElement('div');
-        const taskDescription = document.createElement('textarea');
-        const taskDescriptionLabel = document.createElement('label');
-        taskDescription.setAttribute('name', 'tododescription');
-        taskDescription.setAttribute('id', 'tododescription');
-        taskDescriptionLabel.setAttribute('for', 'tododescription');
-        taskDescriptionLabel.textContent = 'Description';
-
-        descriptionContainer.classList.add('todo-description-container');
-        descriptionContainer.append(taskDescriptionLabel, taskDescription);
-
+    loadModalContent() {  
         //date
-        const dateContainer = document.createElement('div');
-        const taskDate = document.createElement('input');
-        const taskDateLabel = document.createElement('label');
+        const taskDate = document.querySelector('#tododate');
         const currentDate = getCurrentDate();
-        taskDate.setAttribute('type', 'date')
-        taskDate.setAttribute('name', 'tododate');
-        taskDate.setAttribute('id', 'tododate');
         taskDate.setAttribute('min', `${currentDate.year}-${currentDate.month}-${currentDate.day}`)
-        taskDateLabel.setAttribute('for', 'tododate');
-        taskDateLabel.textContent = 'Due Date';
-
-        dateContainer.classList.add('todo-date-container');
-        dateContainer.append(taskDateLabel, taskDate);
-
-        //time
-        const timeContainer = document.createElement('div');
-        const taskTime = document.createElement('input');
-        const taskTimeLabel = document.createElement('label');
-        taskTime.setAttribute('type', 'time')
-        taskTime.setAttribute('name', 'todotime');
-        taskTime.setAttribute('id', 'todotime');
-        taskTimeLabel.setAttribute('for', 'todotime');
-        taskTimeLabel.textContent = 'Time Due';
-
-        timeContainer.classList.add('todo-date-container');
-        timeContainer.append(taskTimeLabel, taskTime);
-
-
-        //addtodo button
-        const todoSubmitButton = document.createElement('button');
-        todoSubmitButton.classList.add('submit-todo-button')
-        todoSubmitButton.textContent = 'Add ToDo';
-
-
-
-        this.modalForm.append(nameContainer, descriptionContainer, dateContainer, timeContainer, todoSubmitButton);
 
     }
 }
