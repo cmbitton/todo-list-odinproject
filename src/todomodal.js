@@ -32,11 +32,11 @@ export default class ToDoModal {
         return exitForm;
     }
 
-    loadModalContent() {  
+    loadModalContent() {
         //date
         const taskDate = document.querySelector('#tododate');
         const currentDate = getCurrentDate();
-        taskDate.setAttribute('min', `${currentDate.year}-${currentDate.month}-${currentDate.day}`)
+        taskDate.setAttribute({'min': `${currentDate.year}-${currentDate.month}-${currentDate.day}`, 'required': true})
 
     }
 }

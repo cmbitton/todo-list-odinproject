@@ -32,6 +32,12 @@ window.addEventListener('click', (e) => {
 
 
 submitTodoButton.addEventListener('click', (e) => {
+    let isFormValid = document.querySelector('form').checkValidity();
+    if(!isFormValid) {
+        document.querySelector('form').reportValidity();
+        e.stopPropagation();
+    }
+    else{ 
     e.preventDefault();
         const todoTitle = document.querySelector('#todoname').value;
         const todoDescription = document.querySelector('#tododescription').value;
@@ -43,6 +49,7 @@ submitTodoButton.addEventListener('click', (e) => {
         landingLoader.mainContent.loadTodos(todosList);
         todomodal.closeModal(e);
         landingLoader.dimBackground();
+    }
     })
 
 
