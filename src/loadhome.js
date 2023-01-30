@@ -34,7 +34,7 @@ class MainContent {
             const todoContainer = document.createElement('div');
             todoContainer.classList.add('todo-container');
             todoContainer.setAttribute('data-todo-index', i);
-            if(todo.complete === true) todoContainer.classList.add('completed');
+            if (todo.complete === true) todoContainer.classList.add('completed');
             i++
             //title
             const todoTitle = document.createElement('h2');
@@ -54,30 +54,41 @@ class MainContent {
             //time
             const todoTime = document.createElement('p');
             todoTime.classList.add('todo-time');
-            if(todo.time !== ''){
-            todoTime.innerHTML = `<span class="due-time-label">Time Due: </span>${formatTime(todo.time)}`;
-        }
+            if (todo.time !== '') {
+                todoTime.innerHTML = `<span class="due-time-label">Time Due: </span>${formatTime(todo.time)}`;
+            }
             else {
-            todoTime.innerHTML = `<span class="due-time-label">Time Due: </span> No Time Set`;
+                todoTime.innerHTML = `<span class="due-time-label">Time Due: </span> No Time Set`;
             }
 
             //completion button
             const completed = document.createElement('button');
             completed.setAttribute('type', 'button')
             completed.classList.add('complete-button');
-            if(todo.complete === true) completed.classList.add('completed');
+            if (todo.complete === true) completed.classList.add('completed');
             (todo.complete === false) ? completed.textContent = 'Not Completed' : completed.textContent = 'Completed';
 
             //options menu
+            const optionsMenuContainer = document.createElement('div');
+            optionsMenuContainer.classList.add('todo-options');
+            optionsMenuContainer.innerHTML = '<span class="material-symbols-outlined todo-options-icon">more_vert</span>';
+
+            //options
             const optionsContainer = document.createElement('div');
-            optionsContainer.classList.add('todo-options')
-            optionsContainer.innerHTML = '<span class="material-symbols-outlined">more_vert</span>';
+            const removeTodo = document.createElement('div');
+            removeTodo.textContent = 'Remove';
+            removeTodo.classList.add('remove-todo');
+            optionsContainer.classList.add('todo-options-container', 'hidden');
+            optionsContainer.append(removeTodo);
 
 
-            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed, optionsContainer);
+
+            optionsMenuContainer.append(optionsContainer);
+            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed, optionsMenuContainer);
             this.todoscontainer.append(todoContainer);
         }
         this.addCompletionButtonEvent(arr);
+        this.showTodoOptions();
     }
 
     addCompletionButtonEvent(arr) {
@@ -96,6 +107,18 @@ class MainContent {
                     button.textContent = 'Completed';
                     arr[e.target.parentNode.getAttribute('data-todo-index')].complete = true;
                 };
+            })
+        }
+    }
+
+    showTodoOptions() {
+        const todoOptionButton = document.querySelectorAll('.todo-options-icon');
+        for (const button of todoOptionButton) {
+            button.addEventListener('click', (e) => {
+                const todo = e.target.parentNode;
+                console.log(todo)
+                const options = todo.querySelector('.todo-options-container');
+                (options.classList.contains('hidden')) ? options.classList.remove('hidden') : options.classList.add('hidden');
             })
         }
     }

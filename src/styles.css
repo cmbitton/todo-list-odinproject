@@ -70,13 +70,22 @@ body, html {
 
 .todo-options {
     position: absolute;
-    top: 5;
-    right: 0;
+    top: 10;
+    right: 10;
     font-weight: bold;
 }
 
 .todo-options span {
     font-size: 2rem;
+}
+
+.remove-todo {
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    background-color: #ff6161;
+    padding: 10px 8px;
+    border-radius: 5px;
 }
 
 .complete-button {
