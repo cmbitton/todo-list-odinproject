@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer=""></script>
     <link rel="stylesheet" href="../src/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Document</title>
 </head>
 
@@ -14,15 +15,13 @@
 
         <div class="navbar">
             <h3 class="logo">Your Logo</h3>
-        </div>
-        <div class="menu">
             <div class="nav-button-container">
                 <p class="home navbutton button-selected">Home</p>
                 <p class="projects navbutton">Projects</p>
             </div>
         </div>
         <div class="main-content-container">
-            <div class="add-todo-button">New Todo +</div>
+            <div class="add-todo-button">New To-Do +</div>
             <div class="todos-container"></div>
         </div>
         <div class="new-todo-container hidden">
@@ -31,11 +30,11 @@
                 <div class="todo-name-container"><label for="todoname">Title</label><input required name="todoname"
                         id="todoname"></div>
                 <div class="todo-description-container"><label for="tododescription">Description</label><textarea required
-                        name="tododescription" id="tododescription"></textarea></div>
+                        name="tododescription" id="tododescription" rows="5"></textarea></div>
                 <div class="todo-date-container"><label for="tododate">Due Date</label><input required type="date"
                         name="tododate" id="tododate" min="2023-01-27"></div>
                 <div class="todo-date-container"><label for="todotime">Time Due</label><input type="time"
-                        name="todotime" id="todotime"></div><button class="submit-todo-button">Add ToDo</button>
+                        name="todotime" id="todotime"></div><button class="submit-todo-button">Add To-Do</button>
             </form>
         </div>
     </div>

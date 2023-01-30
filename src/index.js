@@ -13,6 +13,7 @@ const submitTodoButton = document.querySelector('.submit-todo-button');
 newTodoButton.addEventListener('click', (e) => {
     if (modalContainer.classList.contains('hidden')) {
         todomodal.openModal(e);
+        todomodal.clearModalContent();
         landingLoader.dimBackground();
 
     }

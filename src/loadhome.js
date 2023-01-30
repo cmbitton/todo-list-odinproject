@@ -1,20 +1,17 @@
 export default class LandingPage {
     content = document.querySelector('#content');
     nav = document.querySelector('.navbar');
-    menu = document.querySelector('.menu');
     constructor() {
         this.mainContent = new MainContent;
     }
 
     dimBackground() {
         this.nav.style.filter = 'brightness(50%)';
-        this.menu.style.filter = 'brightness(50%)';
         this.mainContent.mainContentContainer.style.filter = 'brightness(50%)';
     }
 
     unDimBackground() {
         this.nav.removeAttribute('style');
-        this.menu.removeAttribute('style');
         this.mainContent.mainContentContainer.removeAttribute('style');
     }
 
@@ -49,15 +46,20 @@ class MainContent {
             todoDescription.classList.add('todo-description');
             todoDescription.textContent = todo.description;
 
-            //description
+            //date
             const todoDate = document.createElement('p');
             todoDate.classList.add('todo-date');
             todoDate.innerHTML = `<span class="due-date-label">Due Date: </span> ${todo.dueDate.slice(5, 7)}/${todo.dueDate.slice(8, 11)}/${todo.dueDate.slice(0, 4)}`;
 
-            //description
+            //time
             const todoTime = document.createElement('p');
             todoTime.classList.add('todo-time');
+            if(todo.time !== ''){
             todoTime.innerHTML = `<span class="due-time-label">Time Due: </span>${formatTime(todo.time)}`;
+        }
+            else {
+            todoTime.innerHTML = `<span class="due-time-label">Time Due: </span> No Time Set`;
+            }
 
             //completion button
             const completed = document.createElement('button');
@@ -66,8 +68,13 @@ class MainContent {
             if(todo.complete === true) completed.classList.add('completed');
             (todo.complete === false) ? completed.textContent = 'Not Completed' : completed.textContent = 'Completed';
 
+            //options menu
+            const optionsContainer = document.createElement('div');
+            optionsContainer.classList.add('todo-options')
+            optionsContainer.innerHTML = '<span class="material-symbols-outlined">more_vert</span>';
 
-            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed);
+
+            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed, optionsContainer);
             this.todoscontainer.append(todoContainer);
         }
         this.addCompletionButtonEvent(arr);

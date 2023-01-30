@@ -39,6 +39,14 @@ export default class ToDoModal {
         taskDate.setAttribute({'min': `${currentDate.year}-${currentDate.month}-${currentDate.day}`, 'required': true})
 
     }
+
+    clearModalContent() {
+        document.querySelector('#todoname').value = '';
+        document.querySelector('#tododescription').value = '';
+        document.querySelector('#tododate').value = '';
+        document.querySelector('#todotime').value = '';
+
+    }
 }
 
 function getCurrentDate() {

@@ -12,15 +12,23 @@ body, html {
 }
 
 #content{
+    position: relative;
     display: grid;
     height: inherit;
-    grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr 8fr;
 }
 
 .navbar {
-    grid-column: 1 / -1;
     background-color: #bbb;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+
+.nav-button-container {
+    display: flex;
+    gap: 50px;
+    font-size: 1.2rem;
 }
 
 .menu {
@@ -37,13 +45,15 @@ body, html {
 
 .todos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     justify-items: center;
     gap: 20px;
+    padding: 50px;
 }
 
 .todo-container {
     display: flex;
+    position: relative;
     width: 100%;
     max-width: 400px;
     flex-direction: column;
@@ -58,6 +68,17 @@ body, html {
     margin-bottom: 10px;
 }
 
+.todo-options {
+    position: absolute;
+    top: 5;
+    right: 0;
+    font-weight: bold;
+}
+
+.todo-options span {
+    font-size: 2rem;
+}
+
 .complete-button {
     width: 135px;
     font-size: 1rem;
@@ -66,6 +87,8 @@ body, html {
     border: none;
     outline: none;
     background-color: #ff6161;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
 
@@ -94,11 +117,69 @@ body, html {
 .new-todo-container {
     position: absolute;
     z-index: 10;
-    top: 40%;
+    grid-column: 2 / -1;
+    top: 25%;
     left: 50%;
-    height: 300px;
+    transform: translate(-50%);
+    height: fit-content;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #7ec4ff;
+}
+
+.new-todo-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.new-todo-container form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+
+}
+
+.new-todo-container form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-todo-container input {
     width: 300px;
-    background-color: lightblue;
+    height: 40px;
+    outline: none;
+    border: none;
+    font-size: 1.5rem;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.new-todo-container textarea {
+    outline: none;
+    border: none;
+    resize: none;
+    font-size: 1.4rem;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.new-todo-container label {
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+}
+
+.submit-todo-button {
+    cursor: pointer;
+    width: 120px;
+    margin: 0px auto;
+    padding: 8px 12px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    background-color: #018d01;
+    color: white;
+    font-size: 1.2rem;
 }
 
 .hidden {
