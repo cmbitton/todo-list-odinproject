@@ -5,6 +5,5 @@ export default class ToDo {
         this.dueDate = dueDate;
         this.time = time;
         this.complete = complete;
-        this.todosList =  [];
     }
 }

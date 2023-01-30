@@ -87,8 +87,6 @@ class MainContent {
             todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed, optionsMenuContainer);
             this.todoscontainer.append(todoContainer);
         }
-        this.addCompletionButtonEvent(arr);
-        this.showTodoOptions();
     }
 
     addCompletionButtonEvent(arr) {

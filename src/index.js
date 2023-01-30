@@ -49,9 +49,58 @@ submitTodoButton.addEventListener('click', (e) => {
         console.log(todosList)
         landingLoader.mainContent.loadTodos(todosList);
         todomodal.closeModal(e);
+        showTodoOptions();
+        addCompletionButtonEvent(todosList);
+        removeTodo();
         landingLoader.dimBackground();
     }
     })
 
 
 
+function removeTodo () {
+    const removeButtons = document.querySelectorAll('.remove-todo');
+    for(const button of removeButtons){
+        button.addEventListener('click', (e) => {
+            const todoContainer = e.target.parentNode.parentNode.parentNode;
+            const todoindex = +todoContainer.getAttribute('data-todo-index');
+            todosList.splice(todoindex, 1);
+            landingLoader.mainContent.loadTodos(todosList);
+            showTodoOptions();
+            addCompletionButtonEvent(todosList);
+            removeTodo();
+        })
+    }
+}
+
+
+function addCompletionButtonEvent(arr) {
+    const completionButton = document.querySelectorAll('.complete-button');
+    for (const button of completionButton) {
+        button.addEventListener('click', (e) => {
+            if (button.classList.contains('completed')) {
+                button.classList.remove('completed');
+                button.textContent = 'Not Completed'
+                e.target.parentNode.classList.remove('completed');
+                arr[e.target.parentNode.getAttribute('data-todo-index')].complete = false;
+            }
+            else {
+                button.classList.add('completed');
+                e.target.parentNode.classList.add('completed');
+                button.textContent = 'Completed';
+                arr[e.target.parentNode.getAttribute('data-todo-index')].complete = true;
+            };
+        })
+    }
+}
+
+function showTodoOptions() {
+    const todoOptionButton = document.querySelectorAll('.todo-options-icon');
+    for (const button of todoOptionButton) {
+        button.addEventListener('click', (e) => {
+            const todo = e.target.parentNode;
+            const options = todo.querySelector('.todo-options-container');
+            (options.classList.contains('hidden')) ? options.classList.remove('hidden') : options.classList.add('hidden');
+        })
+    }
+}
