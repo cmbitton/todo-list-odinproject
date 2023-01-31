@@ -194,3 +194,7 @@ body, html {
 .hidden {
     display: none;
 }
+
+.new-todo-container form div.hidden {
+    display: none;
+}

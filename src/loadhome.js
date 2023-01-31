@@ -61,6 +61,13 @@ class MainContent {
                 todoTime.innerHTML = `<span class="due-time-label">Time Due: </span> No Time Set`;
             }
 
+            //project selection
+            const projects = document.createElement('p')
+            projects.classList.add('todo-project-name');
+            projects.innerHTML = `<span class="due-date-label">Project Name: </span> ${todo.projectName}`;
+
+
+
             //completion button
             const completed = document.createElement('button');
             completed.setAttribute('type', 'button')
@@ -84,7 +91,7 @@ class MainContent {
 
 
             optionsMenuContainer.append(optionsContainer);
-            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed, optionsMenuContainer);
+            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, projects, completed, optionsMenuContainer,);
             this.todoscontainer.append(todoContainer);
         }
     }

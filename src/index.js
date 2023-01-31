@@ -1,21 +1,41 @@
 import { default as LandingPage } from "./loadhome.js";
+import ProjectsPage from "./projects.js";
 import ToDo from "./tasks.js";
 import ToDoModal from "./todomodal.js";
 
 const landingLoader = new LandingPage();
 const todomodal = new ToDoModal();
 const todosList = [];
+const todoContainer = document.querySelector('.todos-container');
 const modalContainer = document.querySelector('.new-todo-container');
 const newTodoButton = document.querySelector('.add-todo-button');
 const submitTodoButton = document.querySelector('.submit-todo-button');
+const projectsButton = document.querySelector('.projects');
+const projectSelection = document.querySelector('#project-selection');
+const homeButton = document.querySelector('.home');
 
+
+function resetNewTodoProjectSelection () {
+    const projectNameContainer = document.querySelector('.project-name-container');
+    const projectTitle = document.querySelector('#project-name')
+    if (projectSelection.value === 'New Project'){
+        if(projectNameContainer.classList.contains('hidden')) projectNameContainer.classList.remove('hidden');
+        projectTitle.value = '';
+    }
+    else {
+        if(!projectNameContainer.classList.contains('hidden')) projectNameContainer.classList.add('hidden');
+    }
+}
+//event listeners
 //opens the add new todo modal
 newTodoButton.addEventListener('click', (e) => {
     if (modalContainer.classList.contains('hidden')) {
         todomodal.openModal(e);
         todomodal.clearModalContent();
         landingLoader.dimBackground();
-
+        //resets default project selection
+        projectSelection.value = 'none';
+        resetNewTodoProjectSelection();
     }
 });
 
@@ -27,10 +47,27 @@ window.addEventListener('click', (e) => {
 
 })
 
+homeButton.addEventListener('click', () => {
+    landingLoader.mainContent.loadTodos(todosList);
+    projectsButton.classList.remove('button-selected');
+    homeButton.classList.add('button-selected');
+    showTodoOptions();
+    addCompletionButtonEvent(todosList);
+    addRemoveTodoListener();
+})
 
+projectsButton.addEventListener('click', () => {
+    todoContainer.innerHTML = '';
+    homeButton.classList.remove('button-selected');
+    projectsButton.classList.add('button-selected');
+    const projects = new ProjectsPage;
+    const projectTodos = todosList.filter(a => a.projectName !== 'None');
+    landingLoader.mainContent.loadTodos(projectTodos);
+})
 
-
-
+projectSelection.addEventListener('change', () => {
+    resetNewTodoProjectSelection();
+})
 
 submitTodoButton.addEventListener('click', (e) => {
     let isFormValid = document.querySelector('form').checkValidity();
@@ -44,21 +81,32 @@ submitTodoButton.addEventListener('click', (e) => {
         const todoDescription = document.querySelector('#tododescription').value;
         const todoDate = document.querySelector('#tododate').value;
         const todoTime = document.querySelector('#todotime').value;
-        const todo = new ToDo(todoTitle, todoDescription, todoDate, todoTime, false);
+        let projectName = document.querySelector('#project-name').value;
+        (projectName === '') ? projectName = 'None' : projectName = projectName;
+        const todo = new ToDo(todoTitle, todoDescription, todoDate, todoTime, false, projectName);
         todosList.push(todo);
         console.log(todosList)
-        landingLoader.mainContent.loadTodos(todosList);
         todomodal.closeModal(e);
-        showTodoOptions();
-        addCompletionButtonEvent(todosList);
-        removeTodo();
         landingLoader.dimBackground();
+        if(homeButton.classList.contains('button-selected')){
+        landingLoader.mainContent.loadTodos(todosList);
+        addCompletionButtonEvent(todosList);
+    }
+        else{
+            const projectTodos = todosList.filter(a => a.projectName !== 'None');
+            landingLoader.mainContent.loadTodos(projectTodos);
+            addCompletionButtonEvent(projectTodos);
+        }
+        showTodoOptions();
+        addRemoveTodoListener();
+        
+
     }
     })
 
 
 
-function removeTodo () {
+function addRemoveTodoListener () {
     const removeButtons = document.querySelectorAll('.remove-todo');
     for(const button of removeButtons){
         button.addEventListener('click', (e) => {
@@ -68,7 +116,7 @@ function removeTodo () {
             landingLoader.mainContent.loadTodos(todosList);
             showTodoOptions();
             addCompletionButtonEvent(todosList);
-            removeTodo();
+            addRemoveTodoListener();
         })
     }
 }

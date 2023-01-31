@@ -45,6 +45,7 @@ export default class ToDoModal {
         document.querySelector('#tododescription').value = '';
         document.querySelector('#tododate').value = '';
         document.querySelector('#todotime').value = '';
+        document.querySelector('#project-name').value = '';
 
     }
 }
