@@ -91,7 +91,7 @@ class MainContent {
 
 
             optionsMenuContainer.append(optionsContainer);
-            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, projects, completed, optionsMenuContainer,);
+            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, projects, completed, optionsMenuContainer);
             this.todoscontainer.append(todoContainer);
         }
     }
