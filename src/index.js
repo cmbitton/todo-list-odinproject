@@ -94,7 +94,9 @@ submitTodoButton.addEventListener('click', (e) => {
         landingLoader.dimBackground();
         if (homeButton.classList.contains('button-selected')) {
             landingLoader.mainContent.loadTodos(todosList);
+            showTodoOptions();
             addCompletionButtonEvent(todosList);
+            addRemoveTodoListener();
         }
         else {
             document.querySelector('.todos-container').innerHTML = '';
@@ -122,6 +124,7 @@ function addRemoveTodoListener() {
             else{
                 document.querySelector('.todos-container').innerHTML = '';
                 reloadProjectTodos();
+
             }
 
         })
@@ -135,6 +138,12 @@ function reloadProjectTodos () {
     addCompletionButtonEvent(projectTodos);
     showTodoOptions();
     addRemoveTodoListener();
+    const projectContainers = document.querySelectorAll('.project-container');
+    for(const projectContainer of projectContainers){
+    if(projectContainer.childElementCount === 1) {
+        projectContainer.remove();
+    }
+}
 }
 
 function addCompletionButtonEvent(arr) {
