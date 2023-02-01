@@ -63,13 +63,8 @@ projectsButton.addEventListener('click', () => {
     todoContainer.innerHTML = '';
     homeButton.classList.remove('button-selected');
     projectsButton.classList.add('button-selected');
-    const projectTodos = todosList.filter(a => a.projectName !== 'None');
-    projects.loadProjectContainers();
     projects.loadTitle();
-    projects.loadTodosForProject(projectTodos);
-    addCompletionButtonEvent(projectTodos);
-    showTodoOptions();
-    addRemoveTodoListener();
+    reloadProjectTodos();
     
 })
 
@@ -103,12 +98,7 @@ submitTodoButton.addEventListener('click', (e) => {
         }
         else {
             document.querySelector('.todos-container').innerHTML = '';
-            const projectTodos = todosList.filter(a => a.projectName !== 'None');
-            projects.loadProjectContainers();
-            projects.loadTodosForProject(projectTodos);
-            addCompletionButtonEvent(projectTodos);
-            showTodoOptions();
-            addRemoveTodoListener();
+            reloadProjectTodos();
         }
 
     }
@@ -131,18 +121,21 @@ function addRemoveTodoListener() {
             }
             else{
                 document.querySelector('.todos-container').innerHTML = '';
-                const projectTodos = todosList.filter(a => a.projectName !== 'None');
-                projects.loadProjectContainers();
-                projects.loadTodosForProject(projectTodos);
-                addCompletionButtonEvent(projectTodos);
-                showTodoOptions();
-                addRemoveTodoListener();
+                reloadProjectTodos();
             }
 
         })
     }
 }
 
+function reloadProjectTodos () {
+    const projectTodos = todosList.filter(a => a.projectName !== 'None');
+    projects.loadProjectContainers();
+    projects.loadTodosForProject(projectTodos);
+    addCompletionButtonEvent(projectTodos);
+    showTodoOptions();
+    addRemoveTodoListener();
+}
 
 function addCompletionButtonEvent(arr) {
     const completionButton = document.querySelectorAll('.complete-button');
