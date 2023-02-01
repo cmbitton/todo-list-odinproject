@@ -15,7 +15,7 @@ body, html {
     position: relative;
     display: grid;
     height: inherit;
-    grid-template-rows: 1fr 8fr;
+    grid-template-rows: 100px 8fr;
 }
 
 .navbar {

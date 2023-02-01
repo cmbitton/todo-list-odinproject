@@ -67,6 +67,10 @@ projectsButton.addEventListener('click', () => {
     projects.loadProjectContainers();
     projects.loadTitle();
     projects.loadTodosForProject(projectTodos);
+    addCompletionButtonEvent(projectTodos);
+    showTodoOptions();
+    addRemoveTodoListener();
+    
 })
 
 projectSelection.addEventListener('change', () => {
@@ -98,13 +102,14 @@ submitTodoButton.addEventListener('click', (e) => {
             addCompletionButtonEvent(todosList);
         }
         else {
+            document.querySelector('.todos-container').innerHTML = '';
             const projectTodos = todosList.filter(a => a.projectName !== 'None');
-            landingLoader.mainContent.loadTodos(projectTodos);
+            projects.loadProjectContainers();
+            projects.loadTodosForProject(projectTodos);
             addCompletionButtonEvent(projectTodos);
+            showTodoOptions();
+            addRemoveTodoListener();
         }
-        showTodoOptions();
-        addRemoveTodoListener();
-
 
     }
 })
@@ -118,10 +123,22 @@ function addRemoveTodoListener() {
             const todoContainer = e.target.parentNode.parentNode.parentNode;
             const todoindex = +todoContainer.getAttribute('data-todo-index');
             todosList.splice(todoindex, 1);
-            landingLoader.mainContent.loadTodos(todosList);
-            showTodoOptions();
-            addCompletionButtonEvent(todosList);
-            addRemoveTodoListener();
+            if (homeButton.classList.contains('button-selected')) {
+                landingLoader.mainContent.loadTodos(todosList);
+                showTodoOptions();
+                addCompletionButtonEvent(todosList);
+                addRemoveTodoListener();
+            }
+            else{
+                document.querySelector('.todos-container').innerHTML = '';
+                const projectTodos = todosList.filter(a => a.projectName !== 'None');
+                projects.loadProjectContainers();
+                projects.loadTodosForProject(projectTodos);
+                addCompletionButtonEvent(projectTodos);
+                showTodoOptions();
+                addRemoveTodoListener();
+            }
+
         })
     }
 }

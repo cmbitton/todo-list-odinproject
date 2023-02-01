@@ -17,8 +17,11 @@ export default class ProjectsPage {
     loadProjectContainers() {
         for (const project of this.projectsList) {
             const projectContainer = document.createElement('div');
+            const projectTitle = document.createElement('h2');
             projectContainer.classList.add('project-container');
             projectContainer.setAttribute('data-project-name', project)
+            projectTitle.textContent = project;
+            projectContainer.append(projectTitle);
             this.todosContainer.append(projectContainer);
         }
     }
@@ -56,10 +59,6 @@ export default class ProjectsPage {
                 todoTime.innerHTML = `<span class="due-time-label">Time Due: </span> No Time Set`;
             }
 
-            //project selection
-            const projects = document.createElement('p')
-            projects.classList.add('todo-project-name');
-            projects.innerHTML = `<span class="due-date-label">Project Name: </span> ${todo.projectName}`;
 
 
 
@@ -86,7 +85,7 @@ export default class ProjectsPage {
 
 
             optionsMenuContainer.append(optionsContainer);
-            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, projects, completed, optionsMenuContainer);
+            todoContainer.append(todoTitle, todoDescription, todoDate, todoTime, completed, optionsMenuContainer);
             this.addTodosToProjectContainers(todo.projectName, todoContainer);
 
         }
