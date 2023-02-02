@@ -31,7 +31,20 @@ function resetNewTodoProjectSelection() {
 //event listeners
 //opens the add new todo modal
 newTodoButton.addEventListener('click', (e) => {
+    //removes old projects from dom and projectlist
     if (modalContainer.classList.contains('hidden')) {
+        for (const projectName of projects.projectsList) {
+            let isTodoinProjectList = false
+            for(const todo of todosList){
+                if(todo.projectName === projectName){
+                    isTodoinProjectList = true;
+                }
+            }
+            if(isTodoinProjectList === false){
+                projects.projectsList.splice(projects.projectsList.indexOf(projectName), 1)
+                document.querySelector(`option[value="${projectName}"]`).remove();
+            }
+        }
         todomodal.openModal(e, projects.projectsList);
         todomodal.clearModalContent();
         landingLoader.dimBackground();
@@ -39,7 +52,8 @@ newTodoButton.addEventListener('click', (e) => {
         projectSelection.value = 'none';
         resetNewTodoProjectSelection();
     }
-});
+}
+);
 
 
 //closes add new todo modal
