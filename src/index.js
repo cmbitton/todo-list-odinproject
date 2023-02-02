@@ -32,7 +32,7 @@ function resetNewTodoProjectSelection() {
 //opens the add new todo modal
 newTodoButton.addEventListener('click', (e) => {
     if (modalContainer.classList.contains('hidden')) {
-        todomodal.openModal(e);
+        todomodal.openModal(e, projects.projectsList);
         todomodal.clearModalContent();
         landingLoader.dimBackground();
         //resets default project selection
@@ -84,7 +84,15 @@ submitTodoButton.addEventListener('click', (e) => {
         const todoDate = document.querySelector('#tododate').value;
         const todoTime = document.querySelector('#todotime').value;
         let projectName = document.querySelector('#project-name').value;
-        (projectName === '') ? projectName = 'None' : projectName = projectName;
+        const projectSelection = document.querySelector('#project-selection');
+        if (projectName === '' && projectSelection.value === 'none') {
+            projectName = 'None';
+        }
+        else if (projectName === '' && projectSelection.value !== 'none'){
+            projectName = projectSelection.value;}
+        else if(projectName !== ''){
+            projectName = projectName;
+        }
         const todo = new ToDo(todoTitle, todoDescription, todoDate, todoTime, false, projectName);
         todosList.push(todo);
         if (!projects.projectsList.includes(projectName) && projectName !== 'None') projects.projectsList.push(projectName);

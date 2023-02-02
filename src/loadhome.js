@@ -129,7 +129,7 @@ class MainContent {
     }
 }
 
-function formatTime(time) {
+export function formatTime(time) {
     if (+time.slice(0, 2) === 0) return (`${+time.slice(0, 2) + 12}:${time.slice(3, 5)} AM`);
     else if (+time.slice(0, 2) < 12) return (time += ' AM');
     else if (+time.slice(0, 2) === 12) return (`${time.slice(0, 2)}:${time.slice(3, 5)} PM`);

@@ -9,9 +9,10 @@ export default class ToDoModal {
         this.modalContainer.classList.toggle('hidden');
     }
 
-    openModal(e) {
+    openModal(e, projectList) {
         e.stopPropagation();
         this.toggleModalVisibility();
+        this.updateProjectsSelection(projectList);
     }
 
     closeModal(e) {
@@ -47,6 +48,20 @@ export default class ToDoModal {
         document.querySelector('#todotime').value = '';
         document.querySelector('#project-name').value = '';
 
+    }
+
+    updateProjectsSelection(projectList) {
+        const projectSelection = document.querySelector('#project-selection')
+        console.log(projectSelection)
+        for(const project of projectList){
+            if(document.getElementById(project) === null){
+            const projectChoice = document.createElement('option');
+            projectChoice.value = project;
+            projectChoice.textContent = project;
+            projectChoice.id = project;
+            projectSelection.append(projectChoice);
+            }
+        }
     }
 }
 

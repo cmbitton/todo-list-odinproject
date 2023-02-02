@@ -1,3 +1,5 @@
+import { formatTime } from "./loadhome";
+
 export default class ProjectsPage {
     content = document.querySelector('#content');
     mainContainer = document.querySelector('.main-content-container');
