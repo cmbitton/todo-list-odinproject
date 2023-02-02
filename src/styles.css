@@ -187,9 +187,28 @@ body, html {
     border: none;
     outline: none;
     background-color: #018d01;
-    color: white;
+    color: #eee;
     font-size: 1.2rem;
 }
+
+/*projects CSS*/
+.project-title {
+    text-align: center;
+}
+.project-container {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    background-color: #8d1818;
+    border-radius: 5px;
+}
+
+.project-container > h2 {
+    color: #eee;
+    text-align: center;
+}
+
 
 .hidden {
     display: none;

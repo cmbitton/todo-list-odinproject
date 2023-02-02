@@ -65,7 +65,6 @@ projectsButton.addEventListener('click', () => {
     projectsButton.classList.add('button-selected');
     projects.loadTitle();
     reloadProjectTodos();
-    
 })
 
 projectSelection.addEventListener('change', () => {
