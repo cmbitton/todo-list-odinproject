@@ -42,7 +42,8 @@ newTodoButton.addEventListener('click', (e) => {
             }
             if(isTodoinProjectList === false){
                 projects.projectsList.splice(projects.projectsList.indexOf(projectName), 1)
-                document.querySelector(`option[value="${projectName}"]`).remove();
+                if(document.querySelector(`option[value="${projectName}"]`) !== null){
+                document.querySelector(`option[value="${projectName}"]`).remove();}
             }
         }
         todomodal.openModal(e, projects.projectsList);
@@ -134,8 +135,12 @@ function addRemoveTodoListener() {
     for (const button of removeButtons) {
         button.addEventListener('click', (e) => {
             const todoContainer = e.target.parentNode.parentNode.parentNode;
-            const todoindex = +todoContainer.getAttribute('data-todo-index');
-            todosList.splice(todoindex, 1);
+            const todoName = todoContainer.querySelector('.todo-title').textContent;
+            for(const todo of todosList){
+                if (todo.title === todoName){
+                    todosList.splice(todosList.indexOf(todo), 1)
+                }
+            }
             if (homeButton.classList.contains('button-selected')) {
                 landingLoader.mainContent.loadTodos(todosList);
                 showTodoOptions();
